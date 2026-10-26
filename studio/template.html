@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="nl"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:"Newsreader";src:url("fonts/newsreader.woff2") format("woff2");font-weight:200 800;font-style:normal}
+@font-face{font-family:"Plus Jakarta Sans";src:url("fonts/jakarta.woff2") format("woff2");font-weight:200 800;font-style:normal}
+:root{--sand:#F3EFE6;--paper:#FFFFFF;--ink:#0F1F1C;--ink-muted:#55635F;--line:#D9D2C3;--petrol:#1D4B44;--petrol-soft:#DDE8E4;--amber:#E0A03A;--amber-deep:#9A5B0B;
+  --display:"Newsreader",Georgia,serif;--sans:"Plus Jakarta Sans","Segoe UI",system-ui,sans-serif}
+*{box-sizing:border-box}html,body{margin:0;background:#888}
+.slide{width:1080px;height:1350px;position:relative;overflow:hidden;font-family:var(--sans);display:flex;flex-direction:column;padding:96px 96px 88px}
+.slide.light{background:var(--sand);color:var(--ink)}
+.slide.dark{background:var(--petrol);color:var(--paper)}
+.eyebrow{font-size:26px;line-height:34px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.light .eyebrow{color:var(--petrol)}.dark .eyebrow{color:var(--petrol-soft)}
+.main{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0}
+.title{font-family:var(--display);font-weight:500;letter-spacing:-.02em;margin:0;text-wrap:balance}
+.cover .title{font-size:112px;line-height:1.04}
+.point .title{font-size:76px;line-height:1.1}
+.cta .title{font-size:96px;line-height:1.06}
+.body{margin:40px 0 0;font-size:38px;line-height:1.45;max-width:860px}
+.light .body{color:var(--ink-muted)}.dark .body{color:var(--petrol-soft)}
+.num{font-family:var(--display);font-weight:500;font-size:220px;line-height:.9;color:var(--petrol);letter-spacing:-.03em;margin:0 0 32px}
+.quote{border-left:0;background:var(--paper);border-radius:16px;padding:48px 56px;margin:0 0 44px;font-family:var(--display);font-weight:500;font-size:58px;line-height:1.18;color:var(--ink)}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:48px}
+.count{font-size:24px;font-weight:600;letter-spacing:.08em}
+.light .count{color:var(--ink-muted)}.dark .count{color:var(--petrol-soft)}
+.logo{height:64px;display:block}
+.button{display:inline-flex;align-items:center;gap:20px;align-self:flex-start;background:var(--amber);color:var(--ink);font-weight:700;font-size:40px;line-height:1;padding:30px 44px;border-radius:10px;margin-top:56px}
+.url{margin-top:28px;font-size:32px;color:var(--petrol-soft);letter-spacing:.02em}
+.swipe{font-size:24px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--petrol-soft)}
+.check{position:absolute;right:-40px;top:-30px;width:560px;height:560px;opacity:1}
+.ticks{position:absolute;right:96px;top:96px;display:grid;grid-template-columns:repeat(3,40px);gap:24px}
+</style></head>
+<body><div id="root"></div>
+<script>
+const LOGO_LIGHT = `<svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 236.2 64"><rect width="64" height="64" rx="14" fill="#1D4B44"/><polyline points="18,23 29,45 47,16" fill="none" stroke="#E0A03A" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><g transform="translate(81.41,52) scale(0.05369)"><path d="M270.5 0.0 11 -745H159.25L363.25 -128.0H333.75L537.5 -745.0H686L426.5 0.0Z M1015.75 12.0Q931.75 12.0 868.625 -26.0Q805.5 -64.0 770.5 -128.75Q735.5 -193.5 735.5 -273.0Q735.5 -354.75 771.375 -418.375Q807.25 -482.0 868.375 -518.75Q929.5 -555.5 1006.25 -555.5Q1069.5 -555.5 1118.375 -534.75Q1167.25 -514.0 1201.125 -477.125Q1235.0 -440.25 1252.75 -392.5Q1270.5 -344.75 1270.5 -290.0Q1270.5 -275.5 1269.125 -260.75Q1267.75 -246.0 1264.25 -234.5H844.25V-334.5H1189.75L1127.5 -288.0Q1137.25 -334.0 1123.625 -370.0Q1110 -406 1079.375 -427.0Q1048.75 -448.0 1006.25 -448.0Q964.5 -448.0 932.875 -427.25Q901.25 -406.5 884.75 -367.125Q868.25 -327.75 871.75 -272.0Q867.5 -221.5 885.125 -183.375Q902.75 -145.25 937.125 -124.125Q971.5 -103.0 1017.25 -103.0Q1062 -103 1093.375 -122.0Q1124.75 -141.0 1143.0 -172.5L1249.0 -121.25Q1233.0 -82.25 1198.875 -52.125Q1164.75 -22.0 1118.125 -5.0Q1071.5 12.0 1015.75 12.0Z M1369.5 0.0V-543.5H1493.25V-423.25L1483.25 -440.75Q1501.5 -502.0 1542.25 -525.875Q1583.0 -549.75 1639.5 -549.75H1672.0V-433.5H1625.0Q1569.25 -433.5 1535.0 -399.375Q1500.75 -365.25 1500.75 -303.0V0.0Z M1810 220Q1788 220 1767.0 216.375Q1746.0 212.75 1729.25 204.5V94.75Q1742.25 98.0 1760.375 100.875Q1778.5 103.75 1794.5 103.75Q1839.75 103.75 1860.5 83.25Q1881.25 62.75 1896.5 28.75L1932.75 -55.0L1930.75 55.25L1694.0 -543.5H1835.0L2000.75 -101.5H1950.5L2116.0 -543.5H2257.5L2020.75 55.25Q2000.25 107.0 1970.125 144.25Q1940.0 181.5 1900.375 200.75Q1860.75 220.0 1810 220Z M2595.5 12.0Q2515.75 12.0 2450.375 -24.875Q2385.0 -61.75 2346.25 -126.0Q2307.5 -190.25 2307.5 -272.0Q2307.5 -354.25 2346.125 -418.0Q2384.75 -481.75 2450.0 -518.625Q2515.25 -555.5 2595.5 -555.5Q2675.75 -555.5 2740.625 -518.75Q2805.5 -482.0 2844.0 -418.25Q2882.5 -354.5 2882.5 -272.0Q2882.5 -190.0 2843.625 -125.75Q2804.75 -61.5 2739.875 -24.75Q2675 12 2595.5 12.0ZM2595.5 -108.0Q2639.75 -108.0 2673.5 -129.0Q2707.25 -150.0 2726.75 -187.25Q2746.25 -224.5 2746.25 -272.0Q2746.25 -319.5 2726.75 -356.125Q2707.25 -392.75 2673.5 -414.125Q2639.75 -435.5 2595.5 -435.5Q2551.25 -435.5 2517.125 -414.125Q2483.0 -392.75 2463.375 -356.125Q2443.75 -319.5 2443.75 -272.0Q2443.75 -224.5 2463.375 -187.25Q2483 -150 2517.125 -129.0Q2551.25 -108.0 2595.5 -108.0Z" fill="#0F1F1C"/></g></svg>`;
+const LOGO_DARK = `<svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 236.2 64"><rect width="64" height="64" rx="14" fill="#E0A03A"/><polyline points="18,23 29,45 47,16" fill="none" stroke="#0F1F1C" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><g transform="translate(81.41,52) scale(0.05369)"><path d="M270.5 0.0 11 -745H159.25L363.25 -128.0H333.75L537.5 -745.0H686L426.5 0.0Z M1015.75 12.0Q931.75 12.0 868.625 -26.0Q805.5 -64.0 770.5 -128.75Q735.5 -193.5 735.5 -273.0Q735.5 -354.75 771.375 -418.375Q807.25 -482.0 868.375 -518.75Q929.5 -555.5 1006.25 -555.5Q1069.5 -555.5 1118.375 -534.75Q1167.25 -514.0 1201.125 -477.125Q1235.0 -440.25 1252.75 -392.5Q1270.5 -344.75 1270.5 -290.0Q1270.5 -275.5 1269.125 -260.75Q1267.75 -246.0 1264.25 -234.5H844.25V-334.5H1189.75L1127.5 -288.0Q1137.25 -334.0 1123.625 -370.0Q1110 -406 1079.375 -427.0Q1048.75 -448.0 1006.25 -448.0Q964.5 -448.0 932.875 -427.25Q901.25 -406.5 884.75 -367.125Q868.25 -327.75 871.75 -272.0Q867.5 -221.5 885.125 -183.375Q902.75 -145.25 937.125 -124.125Q971.5 -103.0 1017.25 -103.0Q1062 -103 1093.375 -122.0Q1124.75 -141.0 1143.0 -172.5L1249.0 -121.25Q1233.0 -82.25 1198.875 -52.125Q1164.75 -22.0 1118.125 -5.0Q1071.5 12.0 1015.75 12.0Z M1369.5 0.0V-543.5H1493.25V-423.25L1483.25 -440.75Q1501.5 -502.0 1542.25 -525.875Q1583.0 -549.75 1639.5 -549.75H1672.0V-433.5H1625.0Q1569.25 -433.5 1535.0 -399.375Q1500.75 -365.25 1500.75 -303.0V0.0Z M1810 220Q1788 220 1767.0 216.375Q1746.0 212.75 1729.25 204.5V94.75Q1742.25 98.0 1760.375 100.875Q1778.5 103.75 1794.5 103.75Q1839.75 103.75 1860.5 83.25Q1881.25 62.75 1896.5 28.75L1932.75 -55.0L1930.75 55.25L1694.0 -543.5H1835.0L2000.75 -101.5H1950.5L2116.0 -543.5H2257.5L2020.75 55.25Q2000.25 107.0 1970.125 144.25Q1940.0 181.5 1900.375 200.75Q1860.75 220.0 1810 220Z M2595.5 12.0Q2515.75 12.0 2450.375 -24.875Q2385.0 -61.75 2346.25 -126.0Q2307.5 -190.25 2307.5 -272.0Q2307.5 -354.25 2346.125 -418.0Q2384.75 -481.75 2450.0 -518.625Q2515.25 -555.5 2595.5 -555.5Q2675.75 -555.5 2740.625 -518.75Q2805.5 -482.0 2844.0 -418.25Q2882.5 -354.5 2882.5 -272.0Q2882.5 -190.0 2843.625 -125.75Q2804.75 -61.5 2739.875 -24.75Q2675 12 2595.5 12.0ZM2595.5 -108.0Q2639.75 -108.0 2673.5 -129.0Q2707.25 -150.0 2726.75 -187.25Q2746.25 -224.5 2746.25 -272.0Q2746.25 -319.5 2726.75 -356.125Q2707.25 -392.75 2673.5 -414.125Q2639.75 -435.5 2595.5 -435.5Q2551.25 -435.5 2517.125 -414.125Q2483.0 -392.75 2463.375 -356.125Q2443.75 -319.5 2443.75 -272.0Q2443.75 -224.5 2463.375 -187.25Q2483 -150 2517.125 -129.0Q2551.25 -108.0 2595.5 -108.0Z" fill="#FFFFFF"/></g></svg>`;
+const esc = s => String(s ?? "").replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+function fit(el, min){
+  const box = el.closest(".main");
+  let size = parseFloat(getComputedStyle(el).fontSize);
+  while(box.scrollHeight > box.clientHeight + 1 && size > min){ size -= 2; el.style.fontSize = size + "px"; }
+}
+window.renderSlide = function(s, i, n){
+  const dark = s.type === "cover" || s.type === "cta";
+  const counter = n > 1 ? `${i + 1}/${n}` : "";
+  let inner = "";
+  if(s.type === "cover"){
+    inner = `<svg class="check" viewBox="0 0 200 200" aria-hidden="true"><polyline points="40,80 85,160 175,20" fill="none" stroke="#E0A03A" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" opacity=".95"/></svg>
+      <div class="eyebrow" style="position:relative">${esc(s.eyebrow || "")}</div>
+      <div class="main"><h1 class="title">${esc(s.title)}</h1>${s.body ? `<p class="body">${esc(s.body)}</p>` : ""}</div>
+      <div class="foot">${LOGO_DARK}<span class="swipe">${n > 1 ? "Swipe →" : ""}</span></div>`;
+  } else if(s.type === "cta"){
+    inner = `<div class="eyebrow">${esc(s.eyebrow || "Veryo · AI voor het MKB")}</div>
+      <div class="main"><h1 class="title">${esc(s.title)}</h1>${s.body ? `<p class="body">${esc(s.body)}</p>` : ""}
+        <span class="button">${esc(s.button || "Doe de gratis AI-scan")}</span><div class="url">${esc(s.url || "veryo.nl")}</div></div>
+      <div class="foot">${LOGO_DARK}<span class="count">${counter}</span></div>`;
+  } else {
+    inner = `<div class="eyebrow">${esc(s.eyebrow || "")}</div>
+      <div class="main">${s.num ? `<p class="num">${esc(s.num)}</p>` : ""}${s.quote ? `<p class="quote">“${esc(s.quote)}”</p>` : ""}
+        <h2 class="title">${esc(s.title)}</h2>${s.body ? `<p class="body">${esc(s.body)}</p>` : ""}</div>
+      <div class="foot"><span class="count">${counter}</span>${LOGO_LIGHT}</div>`;
+  }
+  const root = document.getElementById("root");
+  root.innerHTML = `<div class="slide ${dark ? "dark" : "light"} ${s.type}" id="slide">${inner}</div>`;
+  const t = root.querySelector(".title");
+  if(t) fit(t, 44);
+  const b = root.querySelector(".body");
+  if(b){ let sz = 38; while(root.querySelector(".main").scrollHeight > root.querySelector(".main").clientHeight + 1 && sz > 26){ sz -= 2; b.style.fontSize = sz + "px"; } }
+  return document.fonts.ready.then(() => true);
+};
+</script></body></html>
